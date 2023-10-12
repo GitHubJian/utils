@@ -1,0 +1,75 @@
+// Framework grid generation
+
+@mixin make-grid-columns($i: 1, $list: '.#{$namespace}-col-#{$i}') {
+    @for $i from (1 + 1) through $grid-columns {
+        $list: '#{$list}, .#{$namespace}-col-#{$i}';
+    }
+    #{$list} {
+        position: relative;
+        min-height: 1px;
+        padding-right: floor(($grid-gutter-width / 2));
+        padding-left: ceil(($grid-gutter-width / 2));
+    }
+}
+
+@mixin float-grid-columns($i: 1, $list: '.#{$namespace}-col-#{$i}') {
+    @for $i from (1 + 1) through $grid-columns {
+        $list: '#{$list}, .#{$namespace}-col-#{$i}';
+    }
+
+    #{$list} {
+        float: left;
+    }
+}
+
+@mixin calc-grid-column($index, $type) {
+    @if ($type == width) and ($index > 0) {
+        .#{$namespace}-col-#{$index} {
+            width: percentage(($index / $grid-columns));
+        }
+    }
+
+    @if ($type == push) and ($index > 0) {
+        .#{$namespace}-col-push-#{$index} {
+            left: percentage(($index / $grid-columns));
+        }
+    }
+
+    @if ($type == push) and ($index == 0) {
+        .#{$namespace}-col-push-0 {
+            left: auto;
+        }
+    }
+
+    @if ($type == pull) and ($index > 0) {
+        .#{$namespace}-col-pull-#{$index} {
+            right: percentage(($index / $grid-columns));
+        }
+    }
+
+    @if ($type == pull) and ($index == 0) {
+        .#{$namespace}-col-pull-0 {
+            right: auto;
+        }
+    }
+
+    @if ($type == offset) {
+        .#{$namespace}-col-offset-#{$index} {
+            margin-left: percentage(($index / $grid-columns));
+        }
+    }
+}
+
+@mixin loop-grid-columns($columns, $type) {
+    @for $i from 0 through $columns {
+        @include calc-grid-column($i, $type);
+    }
+}
+
+@mixin make-grid() {
+    @include float-grid-columns();
+    @include loop-grid-columns($grid-columns, width);
+    @include loop-grid-columns($grid-columns, pull);
+    @include loop-grid-columns($grid-columns, push);
+    @include loop-grid-columns($grid-columns, offset);
+}

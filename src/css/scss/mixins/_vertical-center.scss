@@ -1,0 +1,12 @@
+@mixin vertical-center() {
+    $selector: &;
+
+    @at-root {
+        #{$selector}::after {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+    }
+}

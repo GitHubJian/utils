@@ -1,0 +1,57 @@
+@import '../common/config';
+@import '../common/var';
+
+@function selectorToString($selector) {
+    /**
+    * inspect(value)
+    * @desc 返回一个字符串的表示形式，value 是一个 sass 表达式
+    */
+    $selector: inspect($selector);
+
+    /**
+    * str-slice(string, start, end)
+    * @desc 从 string 中截取子字符串，通过 start-at 和 end-at 设置始末位置，未指定结束索引值则默认截取到字符串末尾
+    */
+    $selector: str-slice($selector, 2, -2);
+
+    @return $selector;
+}
+
+@function containsModifier($selector) {
+    $selector: selectortostring($selector);
+
+    /**
+    * str-index(string, substring)
+    * @desc 返回 substring 子字符串第一次在 string 中出现的位置
+    * 下标从 1 开始
+    */
+    @if str-index($selector, $modifier-separator) {
+        @return true;
+    } @else {
+        @return false;
+    }
+}
+
+@function containWhenFlag($selector) {
+    $selector: selectortostring($selector);
+
+    @if str-index($selector, '.' + $state-prefix) {
+        @return true;
+    } @else {
+        @return false;
+    }
+}
+
+@function containPseudoClass($selector) {
+    $selector: selectortostring($selector);
+
+    @if str-index($selector, ':') {
+        @return true;
+    } @else {
+        @return false;
+    }
+}
+
+@function hitAllSpecialNestRule($selector) {
+    @return containsModifier($selector) or containWhenFlag($selector) or containPseudoClass($selector);
+}

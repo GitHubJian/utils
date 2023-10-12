@@ -1,0 +1,36 @@
+@import 'bem.scss';
+
+$--media-name: media;
+
+@mixin media($name: $--media-name) {
+    @include b($name) {
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    @include m(middle) {
+        vertical-align: middle;
+    }
+
+    @include m(bottom) {
+        vertical-align: bottom;
+    }
+
+    @include e(body) {
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    @include e(body) {
+        width: 10000px;
+    }
+
+    @include e(object) {
+        display: block;
+    }
+
+    @include e((left, right, body)) {
+        display: table-cell;
+        vertical-align: top;
+    }
+}

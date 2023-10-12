@@ -1,0 +1,27 @@
+@mixin make-row($gutter: $grid-gutter-width) {
+    @include clearfix;
+
+    margin-right: floor(($gutter / -2));
+    margin-left: ceil(($gutter / -2));
+}
+
+@mixin make-column($columns, $gutter: $grid-gutter-width) {
+    position: relative;
+    float: left;
+    width: percentage(($columns / $grid-columns));
+    min-height: 1px;
+    padding-right: ($gutter / 2);
+    padding-left: ($gutter / 2);
+}
+
+@mixin make-column-offset($columns) {
+    margin-left: percentage(($columns / $grid-columns));
+}
+
+@mixin make-column-push($columns) {
+    left: percentage(($columns / $grid-columns));
+}
+
+@mixin make-column-pull($columns) {
+    right: percentage(($columns / $grid-columns));
+}

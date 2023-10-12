@@ -1,0 +1,51 @@
+@import 'bem';
+
+@include b(image) {
+    @include e(container) {
+        position: relative;
+        overflow: hidden;
+    }
+
+    @include e(cover) {
+        width: 100%;
+    }
+
+    @include e(img) {
+        @include m(fill) {
+            object-fit: fill;
+        }
+
+        @include m(contain) {
+            object-fit: contain;
+        }
+
+        @include m(cover) {
+            object-fit: cover;
+        }
+
+        @include m(none) {
+            object-fit: none;
+        }
+
+        @include m(scale-down) {
+            object-fit: scale-down;
+        }
+
+        @include m(square) {
+            object-fit: cover;
+        }
+
+        position: absolute;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+}
+
+@include b(img) {
+    @include m(circle) {
+        border-radius: 50%;
+    }
+}

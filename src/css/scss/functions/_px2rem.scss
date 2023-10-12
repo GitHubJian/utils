@@ -1,0 +1,19 @@
+@import '../common/var.scss';
+
+@function containsUnit($str, $unit) {
+    @if str-index($str, $unit) {
+        @return true;
+    } @else {
+        @return false;
+    }
+}
+
+@function px2rem($px) {
+    $number: $px !default;
+
+    // @if str-index($px, 'px') {
+    //     $number: 5;
+    // }
+
+    @return ($number / $--base-font-size) * 1rem;
+}

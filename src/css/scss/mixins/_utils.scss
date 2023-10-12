@@ -1,0 +1,13 @@
+@import '../common/config.scss';
+
+.#{$namespace}-pull-left {
+    float: left;
+}
+
+.#{$namespace}-pull-right {
+    float: right;
+}
+
+.#{$namespace}-image-circle {
+    border-radius: 50%;
+}

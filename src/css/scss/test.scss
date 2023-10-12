@@ -1,0 +1,23 @@
+@import './mixins/mixins';
+
+@include b(page) {
+    @include e(body) {
+        content: '.tb-page__body';
+    }
+
+    @include meb() {
+        content: 'abc';
+    }
+
+    @include m(default) {
+        content: '.tb-page--default';
+
+        @include e(body) {
+            content: '.tb-page--default .tb-page__body';
+
+            @include m(default) {
+                content: '.tb-page--default .tb-page__body--default';
+            }
+        }
+    }
+}
